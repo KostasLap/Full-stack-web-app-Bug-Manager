@@ -1,0 +1,298 @@
+@startuml
+' Define the Entity package
+package com.TechProAcademy.MysqlJavaApp.Entity {
+    class BugReport {
+        - Integer reportId
+        - Bugs bug
+        - Users user
+        - LocalDateTime dateAdded
+        - Boolean resolved
+        - LocalDateTime dateResolved
+        + getReportId()
+        + setReportId(Integer reportId)
+        + getBug()
+        + setBug(Bugs bug)
+        + getUser()
+        + setUser(Users user)
+        + getDateAdded()
+        + setDateAdded(LocalDateTime dateAdded)
+        + getResolved()
+        + setResolved(Boolean resolved)
+        + getDateResolved()
+        + setDateResolved(LocalDateTime dateResolved)
+        + toString(): String
+    }
+
+    class Bugs {
+        - int bugId
+        - String name
+        - String description
+        - Integer severity
+        - List<BugReport> bugReports
+        + getName()
+        + setName(String name)
+        + getDescription()
+        + setDescription(String description)
+        + getBugId()
+        + setBugId(int bugId)
+        + getSeverity()
+        + setSeverity(Integer severity)
+        + getBugReports()
+        + setBugReports(List<BugReport> bugReports)
+        + toString(): String
+    }
+
+    class Dependencies {
+        - Integer dependencyId
+        - Bugs bug
+        - Bugs dependBug
+        + getDependencyId()
+        + setDependencyId(Integer dependencyId)
+        + getBug()
+        + setBug(Bugs bug)
+        + getDependBug()
+        + setDependBug(Bugs dependBug)
+        + getIntegerOfBugId(Bugs bug)
+        + toString(): String
+    }
+
+    class Users {
+        - Integer userId
+        - String userName
+        - List<BugReport> bugReports
+        + getUserId()
+        + setUserId(Integer userId)
+        + getUserName()
+        + setUserName(String userName)
+        + getBugReports()
+        + setBugReports(List<BugReport> bugReports)
+        + toString(): String
+    }
+}
+
+' Define the Repository package
+package com.TechProAcademy.MysqlJavaApp.Repository {
+    class EntityHelper {
+        - BugsRepository bugsRepository
+        - UsersRepository usersRepository
+        - DependenciesRepository dependenciesRepository
+        - BugReportRepository bugReportRepository
+        - JdbcTemplate jdbcTemplate
+        + findOrCreateUser(String userName): Users
+        + findOrCreateBug(String name, String description, Integer severity): Bugs
+        + findOrCreateDependency(Bugs bug, Bugs dependBug): Dependencies
+        + createBugReportAndUserAndBug(String bugName, String bugDescription, Integer bugSeverity, String dependOnBug, String userName): BugReport
+        + updateStateResolved()
+        + noResolvedReportsList()
+        + resolvedReportsList()
+        + allReportsList()
+        + findMutualDependencies()
+        + exportUserCSV()
+        + exportBugsCSV()
+        + exportDependenciesCSV()
+        + exportBugReportCSV()
+        + readAndAddUsersFromCSV(String filename)
+        + readAndAddBugsFromCSV(String filename)
+        + readAndAddDependenciesFromCSV(String filename)
+        + readAndAddBugsReportsFromCSV(String filename)
+        + resetAutoIncrementAndDeleteAll()
+    }
+
+    interface BugReportRepository {
+        + findByResolved(boolean resolved): List<BugReport>
+        + findByBug(Bugs bug): List<BugReport>
+    }
+
+    interface BugsRepository {
+        + findByName(String name): Optional<Bugs>
+    }
+
+    interface DependenciesRepository {
+        + findByBugAndDependBug(Bugs bug, Bugs dependBug): Optional<Dependencies>
+        + findByBug(Bugs bug): Optional<Dependencies>
+        + findByDependBug(Bugs bug): Optional<Dependencies>
+    }
+
+    interface UsersRepository {
+        + findByUserName(String userName): Optional<Users>
+    }
+}
+
+' Define the Service package
+package com.TechProAcademy.MysqlJavaApp.Service {
+    interface BugReportService {
+        + saveBugReport(BugReportDTO bugReportDTO)
+        + getAllBugReports(): List<BugReportDTO>
+        + deleteReport(int reportId)
+        + updateResolvedState(int reportId)
+        + updateResolvedStateUnresolved(int reportId)
+    }
+
+    class BugReportServiceImpl {
+        + saveBugReport(BugReportDTO bugReportDTO)
+        + getAllBugReports(): List<BugReportDTO>
+        + deleteReport(int reportId)
+        + updateResolvedState(int reportId)
+        + updateResolvedStateUnresolved(int reportId)
+    }
+
+    interface BugsService {
+        + saveBugs(Bugs bug)
+        + getAllBugs(): List<BugDTO>
+        + deleteBug(int bugID)
+        + getBugById(int bugId): Optional<BugDTO>
+    }
+
+    class BugsServiceImpl {
+        + saveBugs(Bugs bug)
+        + getAllBugs(): List<BugDTO>
+        + deleteBug(int bugID)
+        + getBugById(int bugId): Optional<BugDTO>
+    }
+
+    interface DependenciesService {
+        + saveDependency(DependencyDTO dependency)
+        + getAllDependencies(): List<DependencyDTO>
+        + deleteDependency(int dependencyId)
+    }
+
+    class DependenciesServiceImpl {
+        + saveDependency(DependencyDTO dependency)
+        + getAllDependencies(): List<DependencyDTO>
+        + deleteDependency(int dependencyId)
+    }
+
+    interface UsersService {
+        + saveUser(Users user)
+        + getAllUsers(): List<UserDTO>
+        + deleteUser(int userId)
+        + getUserById(int userId): Optional<UserDTO>
+    }
+
+    class UsersServiceImpl {
+        + saveUser(Users user)
+        + getAllUsers(): List<UserDTO>
+        + deleteUser(int userId)
+        + getUserById(int userId): Optional<UserDTO>
+    }
+}
+
+' Define the DTO package
+package com.TechProAcademy.MysqlJavaApp.DTO {
+    class BugDTO {
+        - int bugId
+        - String name
+        - String description
+        - Integer severity
+        + getBugId()
+        + setBugId(int bugId)
+        + getName()
+        + setName(String name)
+        + getDescription()
+        + setDescription(String description)
+        + getSeverity()
+        + setSeverity(Integer severity)
+    }
+
+    class BugReportDTO {
+        - Integer reportId
+        - Integer bugId
+        - Integer userId
+        - LocalDateTime dateAdded
+        - Boolean resolved
+        - LocalDateTime dateResolved
+        + getReportId()
+        + setReportId(Integer reportId)
+        + getBugId()
+        + setBugId(Integer bugId)
+        + getUserId()
+        + setUserId(Integer userId)
+        + getDateAdded()
+        + setDateAdded(LocalDateTime dateAdded)
+        + getResolved()
+        + setResolved(Boolean resolved)
+        + getDateResolved()
+        + setDateResolved(LocalDateTime dateResolved)
+    }
+
+    class DependencyDTO {
+        - Integer dependencyId
+        - Integer bugOnId
+        - Integer dependsOnBugId
+        + getDependencyId()
+        + setDependencyId(Integer dependencyId)
+        + getBugOnId()
+        + setBugOnId(Integer bugOnId)
+        + getDependsOnBugId()
+        + setDependsOnBugId(Integer dependsOnBugId)
+    }
+
+    class UserDTO {
+        - int userId
+        - String userName
+        + getUserId()
+        + setUserId(int userId)
+        + getUserName()
+        + setUserName(String userName)
+    }
+}
+
+' Define the Controller package
+package com.TechProAcademy.MysqlJavaApp.Controller {
+    class BugsController {
+        + add(Bugs bug): String
+        + getAllBugs(): List<BugDTO>
+        + deleteBug(int id): String
+        + getBugById(int id): Optional<BugDTO>
+    }
+
+    class BugsReportController {
+        + add(BugReportDTO bugReportDTO): String
+        + getAllReports(): List<BugReportDTO>
+        + deleteReport(int id): String
+        + updateToResolved(int id): String
+        + updateToUnresolved(int id): String
+    }
+
+    class DependenciesController {
+        + add(DependencyDTO dependencyDTO): String
+        + getAllDependencies(): List<DependencyDTO>
+        + deleteDependency(int id): String
+    }
+
+    class UsersController {
+        + add(Users user): String
+        + getAllUsers(): List<UserDTO>
+        + deleteUser(int id): String
+        + getUserById(int id): Optional<UserDTO>
+    }
+}
+
+' Define relationships
+BugReport --> Bugs
+BugReport --> Users
+Bugs --> BugReport
+Dependencies --> Bugs : bug
+Dependencies --> Bugs : dependBug
+Users --> BugReport
+
+EntityHelper --> BugReportRepository
+EntityHelper --> BugsRepository
+EntityHelper --> DependenciesRepository
+EntityHelper --> UsersRepository
+
+BugReportServiceImpl ..|> BugReportService
+BugsServiceImpl ..|> BugsService
+DependenciesServiceImpl ..|> DependenciesService
+UsersServiceImpl ..|> UsersService
+
+BugsController ..|> BugsService
+BugsReportController ..|> BugReportService
+DependenciesController ..|> DependenciesService
+UsersController ..|> UsersService
+
+BugDTO ..> Bugs
+BugReportDTO ..> BugReport
+DependencyDTO ..> Dependencies
+UserDTO ..> Users
+@enduml

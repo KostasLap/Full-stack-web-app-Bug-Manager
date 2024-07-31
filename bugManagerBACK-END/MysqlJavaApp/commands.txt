@@ -1,0 +1,70 @@
+entity helper:
+
+
+//		entityHelper.readAndAddUsersFromCSV("users.csv");
+//		entityHelper.readAndAddBugsFromCSV("bugs.csv");
+//		entityHelper.readAndAddDependenciesFromCSV("dependencies.csv");
+//		entityHelper.readAndAddBugsReportsFromCSV("bugreport.csv");
+//		entityHelper.findMutualDependencies();
+
+
+//		entityHelper.exportUserCSV();
+//		entityHelper.exportBugsCSV();
+//		entityHelper.exportBugReportCSV();
+//		entityHelper.exportDependenciesCSV();
+
+
+
+users:
+
+//		Users user1 = entityHelper.findOrCreateUser("Kostas");
+//		Users user2 = entityHelper.findOrCreateUser("Maria");
+//		Users user3 = entityHelper.findOrCreateUser("Julia");
+//		Users user4 = entityHelper.findOrCreateUser("Soco");
+//		Users user5 = entityHelper.findOrCreateUser("Kostas");
+
+
+bugs:
+
+//		Bugs bug1 = entityHelper.findOrCreateBug("testError1.1","logic severity",10);
+//		Bugs bug2 = entityHelper.findOrCreateBug("WinError","Start failed",5);
+//		Bugs bug3 = entityHelper.findOrCreateBug("FbError","Coomment invalid",1);
+//		Bugs bug4 = entityHelper.findOrCreateBug("SqlBug","SaveTransaction error",4);
+//		Bugs bug5 = entityHelper.findOrCreateBug("JavaError","Import ?",3);
+//		Bugs bug6 = entityHelper.findOrCreateBug("InstaError","Import photos",1);
+
+
+dependencies:
+
+//		Dependencies dep1 = entityHelper.findOrCreateDependency(bug2,bug4);
+//		Dependencies dep2 = entityHelper.findOrCreateDependency(bug1,bug3);
+//		Dependencies dep3 = entityHelper.findOrCreateDependency(bug5,bug2);
+//		Dependencies dep4 = entityHelper.findOrCreateDependency(bug3,bug6);
+//		Dependencies dep5 = entityHelper.findOrCreateDependency(bug4,bug5);
+//		Dependencies dep6 = entityHelper.findOrCreateDependency(bug6,bug1);
+
+
+bug  reports :
+
+//		BugReport report1 = new BugReport(bug1,user1,LocalDateTime.now(),false,null);
+//		bugReportRepository.save(report1);
+//
+//		BugReport report2 = new BugReport(bug2,user2,LocalDateTime.now(),false,null);
+//		bugReportRepository.save(report2);
+//
+//		BugReport report3 = new BugReport(bug3,user3,LocalDateTime.now(),false,null);
+//		bugReportRepository.save(report3);
+//
+//		BugReport report4 = new BugReport(bug4,user4,LocalDateTime.now(),true,LocalDateTime.now());
+//		bugReportRepository.save(report4);
+//
+//		BugReport report5 = new BugReport(bug5,user5,LocalDateTime.now(),true,LocalDateTime.now());
+//		bugReportRepository.save(report5);
+
+
+
+
+
+
+
+

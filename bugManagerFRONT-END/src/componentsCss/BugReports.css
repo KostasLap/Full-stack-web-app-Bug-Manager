@@ -1,0 +1,114 @@
+
+#bugReports-h3 {
+    border-top: solid #343a40;
+    text-align: center;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#bugReports-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#bugReports-form input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 300px;
+    font-size: 16px;
+}
+
+#bugReports-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#bugReports-form button:hover {
+    background-color: #218838;
+}
+
+#bugReports-ol {
+    list-style-type: none;
+    padding-left: 0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#bugReports-ol li {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#bugReports-ol li button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#bugReports-ol li button.delete-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+#bugReports-ol li button.delete-button:hover {
+    background-color: #c82333;
+}
+
+#bugReports-ol li button.resolved-button {
+    background-color: #28a745;
+    color: white;
+}
+
+#bugReports-ol li button.resolved-button:hover {
+    background-color: #218838;
+}
+
+#bugReports-ol li button.unresolved-button {
+    background-color: #ffc107;
+    color: white;
+}
+
+#bugReports-ol li button.unresolved-button:hover {
+    background-color: #e0a800;
+}
+
+button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
